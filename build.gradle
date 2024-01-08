@@ -1,0 +1,38 @@
+// Copyright 2000-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+plugins {
+  id 'java'
+  id 'org.jetbrains.kotlin.jvm' version '1.5.31'
+  id 'application'
+  id "com.github.johnrengelman.shadow" version "7.1.0"
+}
+
+compileJava {
+  sourceCompatibility '16'
+  targetCompatibility '16'
+}
+
+sourceSets {
+  test.java.srcDirs 'test'
+}
+
+repositories { mavenCentral() }
+dependencies {
+  implementation("com.github.javaparser:javaparser-symbol-solver-core:3.23.0")
+  implementation 'org.openjdk.nashorn:nashorn-core:15.3'
+  testImplementation 'junit:junit:4.12'
+  testImplementation 'org.assertj:assertj-core:3.12.2'
+}
+
+jar {
+  archiveFileName = 'deobf.jar'
+  manifest {
+    attributes 'Main-Class': 'me.deob.Main'
+  }
+}
+
+application {
+  mainClassName "me.deob.Main"
+}
+
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
